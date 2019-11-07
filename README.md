@@ -1,3 +1,93 @@
+## Pop Quiz - Day 1
+
+1. What is destructuring? Why would you use it?
+To pull a certain property or index out of an array or object. syntactic sugar to assign names to values
+Useful for less repetitive typing, or removing from ...rest to not pass down when spreading.
+With destructuring, things on the right win/override
+
+2. What library renders react for the web?
+React DOM
+
+3. var is dead, why? WHat should you use instead?
+const and let - mostly const
+const and let can do everything that var can a bit better. they're block scoped (or just let) instead of window/document-scoped, and provide more info about the purpose of a variable (and warnings if you do something wrong).
+
+4. How do you copy an object in JS? Is it a deep or shallow copy? What's the diff?
+you can spread to copy an object, e.g. const copy = {...original}
+shallow copy only, you can nest spreads to deeper copy
+
+5. What tool did we use to generate our react app?
+create-react-app
+
+6. The tool we used uses webpack, what's that?
+A bundler/builder
+
+7. WHat is babel? Why do we need it?
+A transpiler that converts ES6 to more browser compatible formats and converts JSX to HTML
+
+8. What tool are we using to format our code? WHy is it useful?
+Prettier, tells you if you have syntax errors, makes everyone's code look the same so it's more readable and consistent
+
+9. What hook did we use for handling data that changes over time?
+useState
+
+10. When does react rerender?
+When props or state changes
+
+11. WHat hook did we use to run code once when the component first loads?
+useEffect, pass it a function first then [] as in no arguments for instances in which it should rerender.
+
+12. We create an infinite loop yesterday with that hook, what was our mistake?
+We were updating state when useEffect ran
+
+13. What tool did we use to create a mock API? WHy not just hardcode json?
+json-server, data changes persisted after reloading the page
+
+14. What did we use to make an HTTP call?
+fetch
+
+15. What is the name of React's flavor of HTML?
+JSX
+
+16. Name at least 3 differences between HTML and the answer to 15.
+- className vs class
+- htmlFor vs for
+- object style vs inline style
+- onClick (camel cased handlers) vs onclick (kabab)
+
+17. Is JSX required?
+No
+
+18. What is JSX compiled down to?
+JS -> React.createElement()
+
+19. What tool is checking our code quality? Is it configurable? How do I see its output?
+eslint, yes, reports on build/commits or look in lower
+
+20. Debugging: how do I debug my react app?
+debugger, creates breakpoints in browser if devtools are open
+
+21. I can see my original code in the browser, is the browser running that code? If not, what technology allows me to see that code?
+No, sourcemaps
+
+22. What is a function that returns a boolean?
+a predicate function
+
+23. Name some useful array methods that are friendly to immutable data.
+map, filter, reduce
+push and pop mutate - don't use them
+
+24. What is a higher order function?
+A function that takes a function as an argument
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
