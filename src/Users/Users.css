@@ -1,0 +1,18 @@
+.App .Users__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.App .Users__table {
+  width: 100%;
+}
+
+.App .Users__buttons {
+  display: flex;
+}
+
+.App .Users__edit-link {
+  display: block;
+  border-bottom: 0;
+  margin-right: 10px;
+}

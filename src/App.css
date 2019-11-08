@@ -1,12 +1,13 @@
 .App {
-  /* text-align: center; */
+  background-color: #FFF;
+  box-shadow: 10px 10px rgb(86, 156, 194), -1px -1px 20px #b1b2b3;
 }
 
-.App-logo {
-  height: 40vmin;
+.App__body {
+  padding: 20px;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -19,4 +20,4 @@
 
 .App-link {
   color: #09d3ac;
-}
+} */

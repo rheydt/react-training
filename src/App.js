@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { getUsers, deleteUser } from "./api/userApi";
-import { Root, Heading } from "@athena/forge";
-// import Heading from "@athena/forge/Button";
-// import SelectionList from "@athena/forge/Button";
-// import SelectionListItem from "@athena/forge/Button";
-// import Button from "@athena/forge/Button";
-import logo from './logo.svg';
-import '@athena/forge/static/css/forge.css';
+import { Root } from "@athena/forge";
+import { Route } from "react-router-dom";
+import { getUsers, deleteUser, addUser, editUser } from "./api/userApi";
+import Nav from "./Nav/Nav";
+import Home from "./Home/Home";
+import ManageUser from "./ManageUser/ManageUser";
+import Users from "./Users/Users";
 import './App.css';
 
 function App() {
-  const [ users, setUsers ] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  const formStyle = {
-    marginTop: 30
-  }
+  // useEffect runs by default after every render
+  useEffect(() => {
+    // using _users to avoid naming confusion with users above
+    getUsers().then(_users => {
+      setUsers(_users);
+    });
+  }, []);
 
   function handleDelete(id) {
     deleteUser(id).then(() => {
@@ -24,46 +27,45 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    getUsers().then(_users => setUsers(_users));
-  }, [ ]);
+  async function handleAddUser(user) {
+    // spread to make copy of user before overwriting
+    // square brackets called computed property syntax, to reference a property using a variable
+    const savedUser = await addUser(user);
+    setUsers([...users, savedUser ]);
+  }
+
+  async function handleEditUser(userToEdit) {
+    const savedUser = await editUser(userToEdit);
+    // replace saved user in the array using map
+    setUsers(users.map((user) => user.id === userToEdit.id ? savedUser : user));
+  }
 
   return (
-    <Root className="App">
+    <Root className="App fe_u_margin--large">
+      <Nav />
+      <main className="App__body">
 
-      <Heading headingTag="h1" text="Users"/>
+        <Route path ="/" exact component={Home} />
 
-      <table>
-        <thead>
-          <th></th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-        </thead>
-        <tbody>
-        {
-          users.map(user => (
-            <tr key={user.id}>
-              <td>
-                { /* Delay execution via arrow function */ }
-                <button onClick={() => handleDelete(user.id)}>Delete</button>
-              </td>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-            </tr>
-          ))
-        }
-        </tbody>
-      </table>
+        <Route
+          path ="/users"
+          render={ reactRouterProps => (
+            // new feature: render props - pass render prop a function in order to pass props down
+            <Users users={users} deleteUser={handleDelete}/>
+          ) }
+        />
 
-      <form style={formStyle}>
-        <label htmlFor='firstname'>First Name:</label>
-        <input id='firstname' />
-
-        <label htmlFor='email'>Email:</label>
-        <input id='email' />
-      </form>
+        <Route
+          path ="/user/:userId?" // adding the :id? makes this route match '/user' and '/user/5'
+          render={ reactRouterProps => (
+            <ManageUser
+              onAddUser={handleAddUser}
+              onEditUser={handleEditUser}
+              users={users}
+            />
+          ) }
+        />
+      </main>
 
     </Root>
   );

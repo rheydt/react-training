@@ -1,0 +1,28 @@
+.App .Nav {
+  display: block;
+  padding: 10px 20px;
+  /* background: #043961; */
+  background: rgb(250, 225, 217);
+}
+
+.App .Nav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Nav .Nav__item {
+  margin-right: 20px;
+}
+
+.Nav .Nav__link,
+.Nav a.Nav__link:visited {
+  /* color: rgb(237, 134, 100); */
+  font-size: 20px;
+}
+
+.Nav .Nav__link:hover {
+  /* color: rgb(237, 134, 100); */
+  /* border-bottom: 1px solid rgb(237, 134, 100); */
+}
